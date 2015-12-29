@@ -15,6 +15,7 @@ class MessageBuilder
 	private $badge;
 	private $sound;
 	private $payload;
+	private $category;
 	private $contentAvailable;
 
 	/**
@@ -127,7 +128,7 @@ class MessageBuilder
 	 */
 	public function addAlertAction($id, $title)
 	{
-		$alertActions[] = array('id' => $id, 'title' => $title);
+		$this->alertActions[] = array('id' => $id, 'title' => $title);
 
 		return $this;
 	}
@@ -142,7 +143,7 @@ class MessageBuilder
 	 */
 	public function addAlertActionLocalized($id, $locKey, $locArgs = array())
 	{
-		$alertActions[] = array('id' => $id, 'locKey' => $locKey, 'locArgs' => $locArgs);
+		$this->alertActions[] = array('id' => $id, 'locKey' => $locKey, 'locArgs' => $locArgs);
 
 		return $this;
 	}
@@ -199,6 +200,19 @@ class MessageBuilder
 	}
 
 	/**
+	 * Set the category identifier for this message used by the app to display custom actions
+	 *
+	 * @param string String of the category identifier
+	 * @return MessageBuilder
+	 */
+	public function setCategory($category)
+	{
+		$this->category = $category;
+
+		return $this;
+	}
+
+	/**
 	 * Set custom payload to go with the message
 	 *
 	 * @param array|json|null The payload to send as array or JSON string
@@ -228,7 +242,7 @@ class MessageBuilder
 		if (count($this->alertActions) > 0)
 		{
 			if (is_string($this->alert)) {
-				$this->alert = array('body' => $body, 'actions' => $this->alertActions);
+				$this->alert = array('body' => $this->alert, 'actions' => $this->alertActions);
 			} else if (is_array($this->alert)) {
 				$this->alert['actions'] = $this->alertActions;
 			}
@@ -240,6 +254,7 @@ class MessageBuilder
 							$this->badge,
 							$this->sound,
 							$this->payload,
+							$this->category,
 							$this->contentAvailable,
 							$this->expiresAt);
 	}

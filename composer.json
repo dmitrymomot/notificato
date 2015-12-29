@@ -8,18 +8,14 @@
 	"authors": [
 		{
 			"name": "Mathijs Kadijk",
-			"email": "mathijs@wrep.nl"
-		},
-		{
-			"name": "Rick Pastoor",
-			"email": "rick@wrep.nl"
+			"email": "mkadijk@gmail.com"
 		}
 	],
 	"support": {
 		"issues": "https://github.com/mac-cain13/notificato/issues"
 	},
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4",
 		"ext-spl": "*",
 		"ext-sockets": "*",
 		"ext-openssl": "*",
